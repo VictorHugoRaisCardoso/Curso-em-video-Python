@@ -15,9 +15,11 @@ while True:
     resultado = computador + numeroDoJogador
     
     if (escolhaJogador in 'P' or escolhaJogador in 'I'):
-        if (resultado % 2 == 0 and escolhaJogador == 'I'):
+        if (resultado % 2 == 0 and escolhaJogador == 'P' or resultado % 2 != 0 and escolhaJogador == 'I'):
             print(f'Você jogou {numeroDoJogador} e o computador {computador}. Total de {resultado} DEU PAR')
+            print(f'Você venceu!')
             vitoriasConsecutivas += 1
-        elif (resultado % 2 )
         else:
+            print(f'Você perdeu.')
             break
+print(f'Você venceu por {vitoriasConsecutivas} vezes consecutivas.')
