@@ -1,13 +1,13 @@
-valorTotal = 0
-totalDeInputs = 0
+valor_total = 0
+total_de_inputs = 0
 
 while True:
-    num = int(input('Digite um número inteiro: '))
-    if num == 999:
+    numero_inteiro = int(input('Digite um número inteiro: '))
+    if numero_inteiro == 999:
         break
     else:
-        totalDeInputs += 1
-        valorTotal += num
+        total_de_inputs += 1
+        valor_total += numero_inteiro
 
-print(f'O total de numeros digitados foi: {totalDeInputs}')
-print(f'A soma de todos os valores digitados foi: {valorTotal}')
+print(f'O total de numeros digitados foi: {total_de_inputs}')
+print(f'A soma de todos os valores digitados foi: {valor_total}')

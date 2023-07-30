@@ -2,14 +2,14 @@
 numero = int(input('Digite um número para calcular seu fatorial: '))
 print(f'{factorial(numero)}')"""
 
-NUMERO = int(input('DIGITE UM NÚMERO: '))
-CONTADOR = NUMERO
-FATORIAL = NUMERO
-print(f'CALCULANDO {NUMERO}!: ', end='')
-print(f'{NUMERO} ', end='')
-while CONTADOR > 1:
+numero = int(input('DIGITE UM NÚMERO: '))
+contador = numero
+fatorial = numero
+print(f'CALCULANDO {numero}!: ', end='')
+print(f'{numero} ', end='')
+while contador > 1:
     print(f'x ', end='')
-    CONTADOR -= 1
-    FATORIAL *= CONTADOR
-    print(f'{CONTADOR} ', end='')
-print(f'= {FATORIAL}')
+    contador -= 1
+    fatorial *= contador
+    print(f'{contador} ', end='')
+print(f'= {fatorial}')

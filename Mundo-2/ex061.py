@@ -1,10 +1,3 @@
-from os import system
-
-def cls():
-    a = system("cls")
-    return a
-
-
 def desing():
     a = print('=' * 40)
     return a

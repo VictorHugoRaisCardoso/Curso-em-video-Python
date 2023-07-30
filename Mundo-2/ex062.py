@@ -1,4 +1,3 @@
-import os
 def desing():
     a = print('=' * 40)
     return a
@@ -23,5 +22,3 @@ while mais != 0:
 
     mais = int(input("Quantos termos a mais você quer mostrar? "))
 print(f'Progressão finalizada com {termo_total} termos mostrados.')
-
-os.system("cls")
