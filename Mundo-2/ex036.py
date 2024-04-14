@@ -1,95 +1,87 @@
-from time import sleep
+class Cliente:
+    def __init__(self) -> None:
+        self.primeiro_nome:str
+        self.sobrenome: str
+        self.nome_completo: str
+        self.idade:int
+        self.renda:float
 
-# Memorizando o valor da casa.
-imovel = float(input('Qual é o valor total do imóvel a ser financiado?: R$'))
-sleep(1)
-# Memorizando o valor da renda.
-salario = float(input('Qual é o valor liquido da sua renda?: R$'))
-sleep(1)
-# Dando escolhas para variar a simulação.
-alternativa = int(input('''Escolha o critério de tempo de financiamento.
-Digite (1) para mês:
-Digite (2) para ano:
-R: '''))
-sleep(1)
-# Montando a estrutura da primeira alternativa.
-if alternativa == 1:
-    # Perguntando ao usuário a quantidade de parcelas a ser financiada.
-    mes = int(input('Em quantas vezes será financiado o valor total do imóvel?: '))
-    sleep(1)
-    # Calculando valores do financiamento.
-    parcelas = imovel / mes
-    # Cálculo de verificação excedente de 30% da renda.
-    limite = salario * 30 / 100
-    # Condicionando os valores.
-    if parcelas > limite:
-        # Recusando Financiamento.
-        sleep(1)
-        print(f'O valor da parcela é de R${parcelas:.2f}, este valor compromete mais de '
-              f'30% do seu salário que seria de R${limite}.')
-        sleep(1)
-        print('Devido a este fator, lamentamos informar que seu financiamento não pode ser'
-              'aprovado! Aumente sua receita ou financie uma casa de menor valor!')
-    # Condicionando os valores.
-    elif parcelas <= limite:
-        sleep(1)
-        # Aprovando Financiamento.
-        print('MEUS PARABÉNS SEU FINANCIAMENTO PODE SER APROVADO!')
-        sleep(1)
-        # Criando variável de finalização.
-        final = int(input('''Para validar o financiamento digite (1):
-Para finalizar sua simulação digite (2):
-R: '''))
-        sleep(1)
-        # Encaminhando Financiamento.
-        if final == 1:
-            print('Estamos encaminhando sua simulação para um vendedor, em breve ele entrará em contato.')
-            sleep(1)
-            print('Obrigado pela preferência!')
-        # Finalizando Simulação.
-        elif final == 2:
-            print('Lamentamos não poder fechar negócio com você agora, esperamos te ver em breve, até mais.')
+    
+    def ler_nome(self):
+        nome:str
+        while True:
+            nome = input('Digite seu primeiro nome: ').title()
+            if nome.isalpha() and len(nome) >= 3:
+                self.primeiro_nome = nome
+                print(f'Nome "{nome}" cadastrado com sucesso!')
+                break
+            else:
+                print('Digite um nome válido!')
+    
 
-# Montando a estrutura da segunda alternativa.
-elif alternativa == 2:
-    # Criando uma variavel para o tempo de financiamento.
-    sleep(1)
-    ano = int(input('De quantos anos será o financiamento do imóvel?: '))
-    # Calculado parcelas do imovel.
-    parcelas = imovel / (ano * 12)
-    # Calculando limite de 30% da renda.
-    limite = salario * 30 / 100
+    def ler_sobrenome(self):
+        sobrenome: str
+        while True:
+            sobrenome = input('Digite seu sobrenome: ').title()
+            if sobrenome.isalpha() and len(sobrenome) >= 3:
+                self.sobrenome = sobrenome
+                self.nome_completo = ' '.join([self.primeiro_nome, self.sobrenome])
+                print(f'Sobrenome "{sobrenome}" cadastrado com sucesso!')
+                break
+            else:
+                print('Digite um sobrenome válido!')
 
-    # Criando condições de financiamento.
-    if parcelas > limite:
-        # Recusando Financiamento.
-        sleep(1)
-        print(f'O valor da parcela é de R${parcelas:.2f}, este valor compromete mais de '
-              f'30% do seu salário que seria de R${limite}.')
-        sleep(1)
-        print('Devido a este fator, lamentamos informar que seu financiamento não pode ser'
-              'aprovado! Aumente sua receita ou financie uma casa de menor valor!')
 
-    # Condicionando os valores.
-    elif parcelas <= limite:
-        sleep(1)
-        # Aprovando Financiamento.
-        print('MEUS PARABÉNS SEU FINANCIAMENTO PODE SER APROVADO!')
-        sleep(1)
-        # Criando variável de finalização.
-        final = int(input('''Para validar o financiamento digite (1):
-Para finalizar sua simulação digite (2):
-R: '''))
-        sleep(1)
-        # Encaminhando Financiamento.
-        if final == 1:
-            print('Estamos encaminhando sua simulação para um vendedor, em breve ele entrará em contato.')
-            sleep(1)
-            print('Obrigado pela preferência!')
-        # Finalizando Simulação.
-        elif final == 2:
-            sleep(1)
-            print('Lamentamos não poder fechar negócio com você agora, esperamos te ver em breve, até mais.')
+    def ler_idade(self):
+        while True:
+            entrada:str = input('Informe sua idade: ')
+            if entrada.isnumeric():
+                entrada = int(entrada)
+                if entrada >= 18:
+                    self.idade = entrada
+                    print('Idade cadastrada com sucesso!')
+                    break
+                print('Desculpe, apenas pessoas com 18 anos ou mais podem se cadastrar.')
+            print('Digite uma idade válida!')
 
-sleep(1)
-print('Fim da Simulação...')
+
+    def ler_renda(self):
+        while True:
+            entrada:str = input('Informe sua renda liquida atual sem casas decimais: R$')
+            try:
+                entrada = float(int(entrada))
+            except AttributeError:
+                print('Digite apenas um valor inteiro: ')
+                continue
+            self.renda = entrada
+            print('Renda cadastrada com sucesso!')
+            break
+
+
+class Simulador():
+    def __init__(self) -> None:
+        self.iniciar:bool
+        self.status:str
+        self.nome_completo:str
+        self.renda:float
+        self.valor_do_imovel:float
+        self.valor_das_parcelas:float
+        self.renda_minima_para_financiamento:float
+        self.PARCELAS:int = 360
+
+
+    def receber_valor_do_imovel(self):
+        while True:
+            entrada:str = input('Informe o valor total do imovel sem ponto flutuante: R$')
+            try:
+                self.valor_do_imovel = float(int(entrada))
+            except Exception(ValueError):
+                print('Valor informado é inválido!')
+                continue
+            break
+
+
+    def simula_financiamento(self):
+        self.valor_das_parcelas = self.valor_do_imovel / self.PARCELAS
+        self.renda_minima_para_financiamento = ...
+
