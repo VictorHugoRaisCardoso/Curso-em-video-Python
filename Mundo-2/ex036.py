@@ -1,7 +1,11 @@
+clientes_cadastrados = []
+
+
 class Cliente:
     def __init__(self) -> None:
         self.primeiro_nome:str
         self.sobrenome: str
+        self.status:str
         self.nome_completo: str
         self.idade:int
         self.renda:float
@@ -60,13 +64,11 @@ class Cliente:
 
 class Simulador():
     def __init__(self) -> None:
-        self.iniciar:bool
         self.status:str
-        self.nome_completo:str
         self.renda:float
+        self.trinta_porcento_da_renda: float
         self.valor_do_imovel:float
         self.valor_das_parcelas:float
-        self.renda_minima_para_financiamento:float
         self.PARCELAS:int = 360
 
 
@@ -81,7 +83,53 @@ class Simulador():
             break
 
 
-    def simula_financiamento(self):
+    def calcula_valor_minimo_necessario_para_financiamento(self):
         self.valor_das_parcelas = self.valor_do_imovel / self.PARCELAS
-        self.renda_minima_para_financiamento = ...
 
+
+    def calcula_valor_equivalente_a_um_terco_da_renda(self):
+        self.trinta_porcento_da_renda = self.renda*30/100
+
+    
+    def retorna_o_status(self):
+        return 'Aprovado' if self.trinta_porcento_da_renda >= self.valor_das_parcelas else 'Reprovado'
+
+    
+    def calcula_valor_das_parcelas(self):
+        self.valor_das_parcelas = self.valor_do_imovel / self.PARCELAS
+
+
+def MainApp():
+    pessoa = Cliente()
+    simulador = Simulador()
+    while True:
+        print('='*50)
+        print(f'{"SIMULADOR DE FINANCIAMENTO":^50}')
+        print('='*50)
+        print('[ I ] INICIAR SIMULAÇÂO')
+        print('[ S ] SAIR')
+        print('='*50)
+        entrada: str = input('-> ').upper()
+        entrada = entrada[0]
+        match entrada:
+            case 'I':
+                pessoa.ler_nome()
+                pessoa.ler_sobrenome()
+                pessoa.ler_idade()
+                pessoa.ler_renda()
+
+                simulador.renda = pessoa.renda
+
+                simulador.receber_valor_do_imovel()
+                simulador.calcula_valor_das_parcelas()
+                simulador.calcula_valor_equivalente_a_um_terco_da_renda()
+                simulador.calcula_valor_minimo_necessario_para_financiamento()
+                pessoa.status = simulador.retorna_o_status()
+
+                clientes_cadastrados.append([pessoa.nome_completo, pessoa.idade, pessoa.renda, pessoa.status])
+                print(clientes_cadastrados)
+            case 'S':
+                break
+        print('Até aqui está tudo caminhando')
+
+MainApp()
