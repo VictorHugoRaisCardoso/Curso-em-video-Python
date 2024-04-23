@@ -156,4 +156,3 @@ def MainApp():
         print('Até aqui está tudo caminhando')
 
 MainApp()
-
