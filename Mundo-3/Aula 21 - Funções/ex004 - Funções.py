@@ -7,14 +7,12 @@ def LeiaInt(mensagem):
     mensagem = input(f'{mensagem}')
     if mensagem.isnumeric():
         return int(mensagem)
-    else:
-        while True:
-            print('ERRO Digite um número válido.')
-            mensagem = input('Digite um número: ')
-            if mensagem.isnumeric() == True:
-                break
+    while True:
+        print('ERRO Digite um número válido.')
+        mensagem = input('Digite um número: ')
+        if mensagem.isnumeric() == True:
+            break
         return int(mensagem)
-
 
 n = LeiaInt('Digite um número: ')
 print(n)
